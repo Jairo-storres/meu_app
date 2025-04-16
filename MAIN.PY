@@ -7,24 +7,36 @@ from pygame import mixer
 mixer.init()
 
 # Listas de palavras, imagens e áudios
-palavras = ["bola", "casa", "medo", "meia", "sapato", "teia", "tela"]
-imagens = [
-    "imagens/bola.jpg",
-    "imagens/casa.jpg",
-    "imagens/medo.jpg",
-    "imagens/meia.jpg",
-    "imagens/sapato.jpg",
-    "imagens/teia.png",
-    "imagens/tela.png"
+palavras = [
+    "bola", "casa", "medo", "meia", "sapato", "teia", "elefante", "sapo", "mala", "pato",
+    "lupa", "luva", "lata", "gato", "rato", "vaca", "lobo", "urso", "peixe", "foca",
+    "anta", "corvo", "livro", "papel", "nuvem", "fogo", "moto", "barco", "cavalo",
+    "girafa", "tartaruga", "esquilo", "telefone", "panela", "janela", "relogio",
+    "pipoca", "sorvete", "estrela", "ovo", "suco", "macaco", "borboleta"
 ]
+
+imagens = [
+    "imagens/bola.jpg", "imagens/casa.jpg", "imagens/medo.jpg", "imagens/meia.jpg", "imagens/sapato.jpg",
+    "imagens/teia.png", "imagens/elefante.jpg", "imagens/sapo.jpg", "imagens/mala.jpg", "imagens/pato.jpg",
+    "imagens/lupa.jpg", "imagens/luva.jpg", "imagens/lata.jpg", "imagens/gato.jpg", "imagens/rato.jpg",
+    "imagens/vaca.jpg", "imagens/lobo.jpg", "imagens/urso.jpg", "imagens/peixe.jpg", "imagens/foca.png",
+    "imagens/anta.jpg", "imagens/corvo.png", "imagens/livro.png", "imagens/papel.jpg", "imagens/nuvem.jpg",
+    "imagens/fogo.png", "imagens/moto.jpg", "imagens/barco.jpg", "imagens/cavalo.jpg", "imagens/girafa.jpg",
+    "imagens/tartaruga.jpg", "imagens/esquilo.jpg", "imagens/telefone.jpg", "imagens/panela.jpg", "imagens/janela.jpg",
+    "imagens/relogio.jpg", "imagens/pipoca.png", "imagens/sorvete.jpg", "imagens/estrela.jpg", "imagens/ovo.jpg",
+    "imagens/suco.jpg", "imagens/macaco.jpg", "imagens/borboleta.jpg"
+]
+
 audios = [
-    "audios/bola.mp3",
-    "audios/casa.mp3",
-    "audios/medo.mp3",
-    "audios/meia.mp3",
-    "audios/sapato.mp3",
-    "audios/teia.mp3",
-    "audios/tela.mp3"
+    "audios/bola.mp3", "audios/casa.mp3", "audios/medo.mp3", "audios/meia.mp3", "audios/sapato.mp3",
+    "audios/teia.mp3", "audios/elefante.mp3", "audios/sapo.mp3", "audios/mala.mp3", "audios/pato.mp3",
+    "audios/lupa.mp3", "audios/luva.mp3", "audios/lata.mp3", "audios/gato.mp3", "audios/rato.mp3",
+    "audios/vaca.mp3", "audios/lobo.mp3", "audios/urso.mp3", "audios/peixe.mp3", "audios/foca.mp3",
+    "audios/anta.mp3", "audios/corvo.mp3", "audios/livro.mp3", "audios/papel.mp3", "audios/nuvem.mp3",
+    "audios/fogo.mp3", "audios/moto.mp3", "audios/barco.mp3", "audios/cavalo.mp3", "audios/girafa.mp3",
+    "audios/tartaruga.mp3", "audios/esquilo.mp3", "audios/telefone.mp3", "audios/panela.mp3", "audios/janela.mp3",
+    "audios/relógio.mp3", "audios/pipoca.mp3", "audios/sorvete.mp3", "audios/estrela.mp3", "audios/ovo.mp3",
+    "audios/suco.mp3", "audios/macaco.mp3", "audios/borboleta.mp3"
 ]
 
 caminho = os.path.join(os.path.dirname(__file__), "")
