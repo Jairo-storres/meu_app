@@ -65,7 +65,6 @@ def proximo():
         botao_verificar.config(state="disabled")
         botao_audio.config(state="disabled")
         
-
 # Função para carregar imagem
 def carregar_imagem():
     imagem_path = os.path.join(caminho, imagens[indice])
@@ -135,11 +134,15 @@ painel.pack(pady=10)
 entrada = tk.Entry(tela_portugues, font=("Arial", 20))
 entrada.pack(pady=10)
 
+
 botao_verificar = tk.Button(tela_portugues, text="Verificar", command=verificar)
 botao_verificar.pack(pady=5)
 
 botao_audio = tk.Button(tela_portugues, text="Ouvir Palavra", command=tocar_audio)
 botao_audio.pack(pady=5)
+
+botao_avancar = tk.Button(tela_portugues, text="Avançar", command=proximo)
+botao_avancar.pack(pady=5)
 
 btn_voltar1 = tk.Button(tela_portugues, text="Voltar", command=mostrar_tela_principal)
 btn_voltar1.pack(pady=10)
