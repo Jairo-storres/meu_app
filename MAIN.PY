@@ -44,9 +44,12 @@ indice = 0
 
 # Função para verificar a resposta
 def verificar():
+    global pontuacao
     resposta = entrada.get().lower()
     if resposta == palavras[indice]:
         resultado.config(text="Acertou!", fg="green")
+        pontuacao += 1
+        label_pontuacao.config(text=f"Pontuação: {pontuacao}")
         proximo()
     else:
         resultado.config(text="Tente novamente.", fg="red")
@@ -69,7 +72,7 @@ def proximo():
 def carregar_imagem():
     imagem_path = os.path.join(caminho, imagens[indice])
     imagem = Image.open(imagem_path)
-    imagem = imagem.resize((300, 300))
+    imagem = imagem.resize((400, 400))
     imagem_tk = ImageTk.PhotoImage(imagem)
     painel.config(image=imagem_tk)
     painel.image = imagem_tk
@@ -82,7 +85,7 @@ def tocar_audio():
 # Interface principal
 root = tk.Tk()
 root.title("App Educativo")
-root.geometry("400x500")
+root.geometry("800x800")
 
 # Troca de telas
 def mostrar_tela_principal():
@@ -117,29 +120,54 @@ def esconder_todas():
 
 # Tela principal
 tela_principal = tk.Frame(root)
-btn_portugues = tk.Button(tela_principal, text="Português", width=20, command=mostrar_portugues)
-btn_matematica = tk.Button(tela_principal, text="Matemática", width=20, command=mostrar_matematica)
-btn_historia = tk.Button(tela_principal, text="História", width=20, command=mostrar_historia)
+btn_portugues = tk.Button(tela_principal, text="Português", width=30, command=mostrar_portugues)
+btn_matematica = tk.Button(tela_principal, text="Matemática", width=30, command=mostrar_matematica)
+btn_historia = tk.Button(tela_principal, text="História", width=30, command=mostrar_historia)
 
 
-btn_portugues.pack(pady=10)
-btn_matematica.pack(pady=10)
-btn_historia.pack(pady=10)
+btn_portugues.pack(pady=15)
+btn_matematica.pack(pady=15)
+btn_historia.pack(pady=15)
 
 # Tela de Português
 tela_portugues = tk.Frame(root)
 painel = tk.Label(tela_portugues)
 painel.pack(pady=10)
+pontuacao = 0
+
+def atualizar_progresso():
+    label_progresso.config(text=f"Palavra {indice + 1} de {len(palavras)}")
+
+def proximo():
+    global indice
+    indice += 1
+    if indice < len(palavras):
+        carregar_imagem()
+        entrada.delete(0, tk.END)
+        resultado.config(text="")
+        atualizar_progresso()
+    else:
+        resultado.config(text="Parabéns! Você completou o jogo.", fg="blue")
+        entrada.config(state="disabled")
+        botao_verificar.config(state="disabled")
+        botao_audio.config(state="disabled")
+
+
+label_pontuacao = tk.Label(tela_portugues, text="Pontuação: 0", font=("Arial", 14))
+label_pontuacao.pack(pady=5)
+
+label_progresso = tk.Label(tela_portugues, text="Palavra 1 de 43", font=("Arial", 14))
+label_progresso.pack(pady=5)
+
+
+botao_audio = tk.Button(tela_portugues, text="Ouvir Palavra", command=tocar_audio)
+botao_audio.pack(pady=5)
 
 entrada = tk.Entry(tela_portugues, font=("Arial", 20))
 entrada.pack(pady=10)
 
-
 botao_verificar = tk.Button(tela_portugues, text="Verificar", command=verificar)
 botao_verificar.pack(pady=5)
-
-botao_audio = tk.Button(tela_portugues, text="Ouvir Palavra", command=tocar_audio)
-botao_audio.pack(pady=5)
 
 botao_avancar = tk.Button(tela_portugues, text="Avançar", command=proximo)
 botao_avancar.pack(pady=5)
