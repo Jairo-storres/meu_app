@@ -14,15 +14,15 @@ palavras = [
 ]
 
 imagens = [
-    "imagens/bola.jpg", "imagens/casa.jpg", "imagens/medo.jpg", "imagens/meia.jpg", "imagens/sapato.jpg",
-    "imagens/teia.png", "imagens/elefante.jpg", "imagens/sapo.jpg", "imagens/mala.jpg", "imagens/pato.jpg",
-    "imagens/lupa.jpg", "imagens/luva.jpg", "imagens/lata.jpg", "imagens/gato.jpg", "imagens/rato.jpg",
-    "imagens/vaca.jpg", "imagens/lobo.jpg", "imagens/urso.jpg", "imagens/peixe.jpg", "imagens/foca.png",
-    "imagens/anta.jpg", "imagens/corvo.png", "imagens/livro.png", "imagens/papel.jpg", "imagens/nuvem.jpg",
-    "imagens/fogo.png", "imagens/moto.jpg", "imagens/barco.jpg", "imagens/cavalo.jpg", "imagens/girafa.jpg",
-    "imagens/tartaruga.jpg", "imagens/esquilo.jpg", "imagens/telefone.jpg", "imagens/panela.jpg", "imagens/janela.jpg",
-    "imagens/relogio.jpg", "imagens/pipoca.png", "imagens/sorvete.jpg", "imagens/estrela.jpg", "imagens/ovo.jpg",
-    "imagens/suco.jpg", "imagens/macaco.jpg", "imagens/borboleta.jpg"
+   "imagens/bola.png", "imagens/casa.png", "imagens/medo.png", "imagens/meia.png", "imagens/sapato.png",
+   "imagens/teia.png", "imagens/elefante.png", "imagens/sapo.png", "imagens/mala.png", "imagens/pato.png",
+   "imagens/lupa.png", "imagens/luva.png", "imagens/lata.png", "imagens/gato.png", "imagens/rato.png",
+   "imagens/vaca.png", "imagens/lobo.png", "imagens/urso.png", "imagens/peixe.png", "imagens/foca.png",
+   "imagens/anta.png", "imagens/corvo.png", "imagens/livro.png", "imagens/papel.png", "imagens/nuvem.png",
+   "imagens/fogo.png", "imagens/moto.png", "imagens/barco.png", "imagens/cavalo.png", "imagens/girafa.png",
+   "imagens/tartaruga.png", "imagens/esquilo.png", "imagens/telefone.png", "imagens/panela.png", "imagens/janela.png",
+   "imagens/relogio.png", "imagens/pipoca.png", "imagens/sorvete.png", "imagens/estrela.png", "imagens/ovo.png",
+   "imagens/suco.png", "imagens/macaco.png", "imagens/borboleta.png"
 ]
 
 audios = [
@@ -143,17 +143,23 @@ label_progresso.pack(pady=5)
 botao_audio = tk.Button(tela_portugues, text="Ouvir Palavra", width=20, height=2, command=tocar_audio, bg=COR_BOTAO, fg=COR_TEXTO)
 botao_audio.pack(pady=5)
 
-entrada = tk.Entry(tela_portugues, font=("Arial", 20))
-entrada.pack(pady=10)
+entrada = tk.Entry(tela_portugues, font=("Arial", 20), width=25)  # Aumentando o width
+entrada.pack(pady=30)
 
-botao_verificar = tk.Button(tela_portugues, text="Verificar", width=20, height=2, command=verificar, bg=COR_BOTAO, fg=COR_TEXTO)
-botao_verificar.pack(pady=5)
 
-botao_avancar = tk.Button(tela_portugues, text="Avançar", width=20, height=2, command=proximo, bg=COR_BOTAO, fg=COR_TEXTO)
-botao_avancar.pack(pady=5)
+# Criando o frame para alinhar os botões na horizontal
+frame_botoes = tk.Frame(tela_portugues)
+frame_botoes.pack(pady=10)
 
-btn_voltar1 = tk.Button(tela_portugues, text="Voltar", width=20, height=2, command=lambda: mostrar_tela(tela_principal), bg=COR_BOTAO, fg=COR_TEXTO)
-btn_voltar1.pack(pady=10)
+botao_verificar = tk.Button(frame_botoes, text="Verificar", width=15, height=2, command=verificar, bg=COR_BOTAO, fg=COR_TEXTO)
+botao_verificar.pack(side="left", padx=5)
+
+botao_avancar = tk.Button(frame_botoes, text="Avançar", width=15, height=2, command=proximo, bg=COR_BOTAO, fg=COR_TEXTO)
+botao_avancar.pack(side="left", padx=5)
+
+btn_voltar1 = tk.Button(frame_botoes, text="Voltar", width=15, height=2, command=lambda: mostrar_tela(tela_principal), bg=COR_BOTAO, fg=COR_TEXTO)
+btn_voltar1.pack(side="left", padx=5)
+
 
 resultado = tk.Label(tela_portugues, text="", font=("Arial", 16), bg=COR_FUNDO)
 resultado.pack(pady=10)
