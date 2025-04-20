@@ -39,21 +39,11 @@ audios = [
 
 caminho = os.path.dirname(__file__)
 indice = 0
-pontuacao = 0
 
-# Cores e visuais (da branch Nmayelle)
-COR_FUNDO = "#f1fdf3"
-COR_BOTAO = "#b2e1a1"
-COR_TEXTO = "#2a8c2f"
-
-# === Funções ===
 def verificar():
-    global pontuacao
     resposta = entrada.get().lower()
     if resposta == palavras[indice]:
         resultado.config(text="Acertou!", fg="green")
-        pontuacao += 1
-        label_pontuacao.config(text=f"Pontuação: {pontuacao}")
         proximo()
     else:
         resultado.config(text="Tente novamente.", fg="red")
@@ -65,7 +55,6 @@ def proximo():
         carregar_imagem()
         entrada.delete(0, tk.END)
         resultado.config(text="")
-        atualizar_progresso()
     else:
         resultado.config(text="Parabéns! Você completou o jogo.", fg="blue")
         entrada.config(state="disabled")
@@ -74,7 +63,8 @@ def proximo():
 
 def carregar_imagem():
     imagem_path = os.path.join(caminho, imagens[indice])
-    imagem = Image.open(imagem_path).resize((400, 400))
+    imagem = Image.open(imagem_path)
+    imagem = imagem.resize((300, 300))
     imagem_tk = ImageTk.PhotoImage(imagem)
     painel.config(image=imagem_tk)
     painel.image = imagem_tk
@@ -82,9 +72,6 @@ def carregar_imagem():
 def tocar_audio():
     mixer.music.load(os.path.join(caminho, audios[indice]))
     mixer.music.play()
-
-def atualizar_progresso():
-    label_progresso.config(text=f"Palavra {indice + 1} de {len(palavras)}")
 
 def mostrar_tela(tela):
     for frame in [tela_principal, tela_portugues, tela_matematica, tela_historia]:
@@ -99,23 +86,29 @@ def mostrar_tela(tela):
         botao_audio.config(state="normal")
         entrada.delete(0, tk.END)
         resultado.config(text="")
-        atualizar_progresso()
 
 # === Interface ===
 root = tk.Tk()
 root.title("App Educativo")
-root.geometry("800x800")
-root.minsize(800, 800)
-root.state("normal")
+root.geometry("800x800")  # Define a resolução mínima
+root.minsize(800, 800)  # Definir o tamanho mínimo da janela
+root.state("normal")  # Permitir redimensionamento
+
+# Cor do fundo das telas (verde mais claro)
+COR_FUNDO = "#f1fdf3"  # Fundo mais claro
+# Cor dos botões (verde mais claro)
+COR_BOTAO = "#b2e1a1"  # Verde mais claro
+# Cor do texto dos botões (verde escuro)
+COR_TEXTO = "#2a8c2f"  # Verde escuro
 
 # === Tela Principal ===
 tela_principal = tk.Frame(root, bg=COR_FUNDO)
 tela_principal.pack(fill="both", expand=True)
 
-# Fundo visual
-fundo_img = Image.open("C:/Users/Kids/Desktop/meu_app/fundo.png").resize((500, 500))
+fundo_img = Image.open("C:/Users/Kids/Desktop/meu_app/fundo.png")
+fundo_img = fundo_img.resize((500, 500))
 fundo_tk = ImageTk.PhotoImage(fundo_img)
-fundo_label = tk.Label(tela_principal, image=fundo_tk, bd=0, bg=COR_FUNDO)
+fundo_label = tk.Label(tela_principal, image=fundo_tk, bd=0, bg=COR_FUNDO)  # Fundo transparente
 fundo_label.place(relx=0.5, rely=0.5, anchor="center")
 
 layout = tk.Frame(tela_principal, bg=COR_FUNDO)
@@ -131,17 +124,8 @@ btn_historia.pack(side="left", padx=10)
 
 # === Tela Português ===
 tela_portugues = tk.Frame(root, bg=COR_FUNDO)
-painel = tk.Label(tela_portugues, bg=COR_FUNDO)
+painel = tk.Label(tela_portugues, bg=COR_FUNDO)  # Altere o fundo aqui também
 painel.pack(pady=10)
-
-label_pontuacao = tk.Label(tela_portugues, text="Pontuação: 0", font=("Arial", 14), bg=COR_FUNDO, fg=COR_TEXTO)
-label_pontuacao.pack(pady=5)
-
-label_progresso = tk.Label(tela_portugues, text="Palavra 1 de 43", font=("Arial", 14), bg=COR_FUNDO, fg=COR_TEXTO)
-label_progresso.pack(pady=5)
-
-botao_audio = tk.Button(tela_portugues, text="Ouvir Palavra", width=20, height=2, command=tocar_audio, bg=COR_BOTAO, fg=COR_TEXTO)
-botao_audio.pack(pady=5)
 
 entrada = tk.Entry(tela_portugues, font=("Arial", 20))
 entrada.pack(pady=10)
@@ -149,13 +133,13 @@ entrada.pack(pady=10)
 botao_verificar = tk.Button(tela_portugues, text="Verificar", width=20, height=2, command=verificar, bg=COR_BOTAO, fg=COR_TEXTO)
 botao_verificar.pack(pady=5)
 
-botao_avancar = tk.Button(tela_portugues, text="Avançar", width=20, height=2, command=proximo, bg=COR_BOTAO, fg=COR_TEXTO)
-botao_avancar.pack(pady=5)
+botao_audio = tk.Button(tela_portugues, text="Ouvir Palavra", width=20, height=2, command=tocar_audio, bg=COR_BOTAO, fg=COR_TEXTO)
+botao_audio.pack(pady=5)
 
 btn_voltar1 = tk.Button(tela_portugues, text="Voltar", width=20, height=2, command=lambda: mostrar_tela(tela_principal), bg=COR_BOTAO, fg=COR_TEXTO)
 btn_voltar1.pack(pady=10)
 
-resultado = tk.Label(tela_portugues, text="", font=("Arial", 16), bg=COR_FUNDO)
+resultado = tk.Label(tela_portugues, text="", font=("Arial", 16))
 resultado.pack(pady=10)
 
 # === Tela Matemática ===
@@ -168,5 +152,6 @@ tela_historia = tk.Frame(root, bg=COR_FUNDO)
 tk.Label(tela_historia, text="Conteúdo de História", bg=COR_FUNDO).pack(pady=20)
 tk.Button(tela_historia, text="Voltar", width=20, height=2, command=lambda: mostrar_tela(tela_principal), bg=COR_BOTAO, fg=COR_TEXTO).pack()
 
-# Iniciar app
+# === Iniciar App ===
+mostrar_tela(tela_principal)
 root.mainloop()
